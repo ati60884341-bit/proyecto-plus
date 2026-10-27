@@ -9,18 +9,28 @@ def mostrar_menu():
 def agregar_tarea():
     titulo = input("Ingrese la descripción de la tarea: ").strip()
     if not titulo:
-     print("¡La descripción no puede estar vacía!")
-     return
-    tareas.append({"titulo": titulo, "completada": False})
-    print(f"✓ Tarea '{titulo}' agregada con éxito.")
+        print("¡La descripción no puede estar vacía!")
+        return
+
+    prioridad = input("Prioridad (Alta/Media/Baja) [Media]: ").strip().capitalize()
+    if prioridad not in ["Alta", "Media", "Baja"]:
+        prioridad = "Media"
+
+    tareas.append({
+        "titulo": titulo,
+        "prioridad": prioridad,
+        "completada": False
+    })
+    print(f"✓ Tarea '{titulo}' agregada con prioridad {prioridad}.")
  
 def listar_tareas():
     if not tareas:
-     print("No hay tareas registradas.")
-     return
+        print("No hay tareas registradas.")
+        return
+
     print("\n--- LISTA DE TAREAS ---")
     for idx, t in enumerate(tareas, 1):
-        print(f"{idx}. [ ] {t['titulo']}")
+        print(f"{idx}. [ ] {t['titulo']} (Prioridad: {t['prioridad']})")
         
 
 def main():
