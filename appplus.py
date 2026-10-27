@@ -30,8 +30,23 @@ def listar_tareas():
 
     print("\n--- LISTA DE TAREAS ---")
     for idx, t in enumerate(tareas, 1):
-        print(f"{idx}. [ ] {t['titulo']} (Prioridad: {t['prioridad']})")
-        
+        estado = "[X]" if t["completada"] else "[ ]"
+        print(f"{idx}. {estado} {t['titulo']} (Prioridad: {t['prioridad']})")
+
+def eliminar_tarea():
+    listar_tareas()
+    if not tareas:
+        return
+
+    try:
+        num = int(input("Número de tarea a eliminar: "))
+        if 1 <= num <= len(tareas):
+            rem = tareas.pop(num - 1)
+            print(f"✓ Tarea '{rem['titulo']}' eliminada.")
+    except ValueError:
+        print("Entrada no válida.")
+
+
 
 def main():
     while True:
